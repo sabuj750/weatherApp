@@ -15,6 +15,21 @@ app.get("/" , (req , res) => {
   res.render('index.ejs');
 } );
 
+app.post("/weather" , async (req  , res) => {
+  const city = req.body.city;
+// console.log(city);
+ const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+ try{
+  const response = await axios.get(url);
+  const weatherData = response.data;
+  // console.log(weatherData);
+  const temp = weatherData.main.temp;
+  res.render('weather.ejs' , { city: city , temp: temp });
+ }catch (error){
+  res.render('weather.ejs' , {city : null , temp : 'Not found or error occure'});
+ }
+});
+
 
 app.listen(port, () => {
   console.log("The server is running on port " + port);
