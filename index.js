@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
-const apiKey = '458191fa2be2578f559e0f19a195c2d7';
+const apiKey = '';
 
 app.get("/" , (req , res) => {
   res.render('index.ejs');
